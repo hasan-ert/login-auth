@@ -1,23 +1,18 @@
 import React from "react";
-import {
-    Routes,
-    Route,
-    BrowserRouter as Router,
-    Navigate,
-} from "react-router-dom";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 
 //pages
 import HomePage from "../../pages/Home/HomePage";
 import LoginPage from "../../pages/Login/LoginPage";
 import RouteGuard from "../RouteGuard/RouteGuard";
 import About from "../../pages/About/About";
-import Signup from "../Signup/Form";
+import Signup from "../../pages/Signup/Form";
 
 function RouteController() {
     //store the route inside this list
     const routeList = [
         {
-            path: "/",
+            path: "/home",
             element: <HomePage />,
         },
         {
@@ -36,6 +31,7 @@ function RouteController() {
                                 key={"route-" + ind}
                                 path={route.path}
                                 element={route.element}
+                                exact
                             />
                         );
                     })}

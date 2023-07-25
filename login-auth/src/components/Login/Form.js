@@ -1,31 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useLogin } from "../../hooks/useLogin";
 
 export default function LoginForm() {
     const { login, isLoading, error } = useLogin();
-    const logInfo = { email: "hasan0877@gmail.com", password: "F34ht153." };
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     useEffect(() => {
         error ? alert("Error: " + error) : console.log();
     }, [error]);
 
-    const handleLogin = async () => {
-        await login(logInfo.email, logInfo.password);
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        await login(email, password);
     };
 
     return (
-        <>
-            <button
-                disabled={isLoading}
-                style={{
-                    width: "120px",
-                    height: "60px",
-                    backgroundColor: "red",
-                }}
-                onClick={handleLogin}
-            >
-                {isLoading ? "Logging In" : "Click here to log in"}
-            </button>
-        </>
+        <form className="login" onSubmit={handleLogin}>
+            <h3>Log In</h3>
+
+            <label>Email address:</label>
+            <input
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+            />
+            <label>Password:</label>
+            <input
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+            />
+
+            <button disabled={isLoading}>Log in</button>
+            {error && <div className="error">{error}</div>}
+        </form>
     );
 }
