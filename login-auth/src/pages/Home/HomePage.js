@@ -4,6 +4,7 @@ function HomePage() {
     const { user, dispatch } = useAuthContext();
 
     const handleLogout = () => {
+        localStorage.removeItem("user");
         dispatch({ type: "LOGOUT" });
     };
     return (
