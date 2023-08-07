@@ -1,6 +1,7 @@
 require("dotenv").config();
 let cors = require("cors");
 
+const passport = require("passport");
 const express = require("express");
 const mongoose = require("mongoose");
 const workoutRoutes = require("./routes/workouts");
