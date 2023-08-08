@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useLogin } from "../../hooks/useLogin";
-import { LoginTypes } from "../../constants/LoginTypes";
-import { useGoogleLogin } from "@react-oauth/google";
 
-export default function LoginForm() {
-    const { login, isLoading, error } = useLogin();
+import useSignup from "../../hooks/useSignUp";
+import { useGoogleLogin } from "@react-oauth/google";
+import { LoginTypes } from "../../constants/LoginTypes";
+
+export default function SignUpForm() {
+    const { signUp, isLoading, error } = useSignup();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -12,23 +13,23 @@ export default function LoginForm() {
         error ? alert("Error: " + error) : console.log();
     }, [error]);
 
-    const handleLogin = async (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault();
-        await login({ email, password }, LoginTypes.JWT);
+        await signUp({ email, password }, LoginTypes.JWT);
     };
 
     async function handleGoogleLoginSuccess(tokenResponse) {
         const accessToken = tokenResponse.access_token;
-        await login({ accessToken }, LoginTypes.Google);
+        console.log(accessToken);
+        await signUp({ accessToken }, LoginTypes.Google);
     }
-
-    const googleLogin = useGoogleLogin({
+    const googleSignUp = useGoogleLogin({
         onSuccess: handleGoogleLoginSuccess,
     });
 
     return (
         <>
-            <form className="login" onSubmit={handleLogin}>
+            <form className="signup" onSubmit={handleSignup}>
                 <h3>Log In</h3>
 
                 <label>Email address:</label>
@@ -48,8 +49,8 @@ export default function LoginForm() {
 
                 {error && <div className="error">{error}</div>}
             </form>
-            <button disabled={isLoading} onClick={googleLogin}>
-                Log in
+            <button disabled={isLoading} onClick={googleSignUp}>
+                Google Sign Up
             </button>
         </>
     );

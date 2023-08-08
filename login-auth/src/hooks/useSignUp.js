@@ -2,34 +2,38 @@ import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import Links from "../constants/Links";
 import { useNavigate } from "react-router-dom";
+import AuthAPI from "../api/index";
+import { LoginTypes } from "../constants/LoginTypes";
 
-export const useSignup = () => {
+export default function useSignup() {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
     const { dispatch } = useAuthContext();
     const navigate = useNavigate();
 
-    const signup = async (email, password) => {
+    const signUp = async (data, type) => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch(Links.Api + "/user/signup", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-        });
-        const json = await response.json();
-
-        if (!response.ok) {
-            setIsLoading(false);
-            setError(json.error);
+        let response;
+        console.log(data);
+        if (type === LoginTypes.Google) {
+            response = await AuthAPI.signUpGoogle(data.accessToken);
+        } else {
+            response = await AuthAPI.signUp(data);
         }
-        if (response.ok) {
+
+        console.log(response);
+        if (response === undefined) {
+            setIsLoading(false);
+            setError(response.error);
+        } else {
+            console.log("here", response);
             // save the user to local storage
-            localStorage.setItem("user", JSON.stringify(json));
+            localStorage.setItem("user", JSON.stringify(response));
 
             // update the auth context
-            dispatch({ type: "LOGIN", payload: json });
+            dispatch({ type: "LOGIN", payload: response });
 
             // update loading state
             setIsLoading(false);
@@ -37,5 +41,5 @@ export const useSignup = () => {
         }
     };
 
-    return { signup, isLoading, error };
-};
+    return { signUp, isLoading, error };
+}

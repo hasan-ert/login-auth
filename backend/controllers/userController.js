@@ -8,18 +8,19 @@ const createToken = (_id) => {
 // login a user
 const loginUser = async (req, res) => {
     if (req.body.googleAccessToken) {
-    }
+        googleSignin(req, res);
+    } else {
+        const { email, password } = req.body;
+        try {
+            const user = await User.login(email, password);
 
-    const { email, password } = req.body;
-    try {
-        const user = await User.login(email, password);
+            // create a token
+            const token = createToken(user._id);
 
-        // create a token
-        const token = createToken(user._id);
-
-        res.status(200).json({ email, token });
-    } catch (error) {
-        res.status(400).json({ error: error.message });
+            res.status(200).json({ email, token });
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
     }
 };
 
@@ -66,7 +67,7 @@ const googleSignin = (req, res) => {
                         .status(400)
                         .json({ message: "User does not exists!" });
                 } else {
-                    const user = await User.login({ email });
+                    const user = await User.loginGoogle(email);
 
                     const token = createToken(user._id);
 
@@ -84,6 +85,7 @@ const googleSignin = (req, res) => {
 const googleSignup = (req, res) => {
     try {
         const data = req.body;
+        console.log(data);
         axios
             .get("https://www.googleapis.com/oauth2/v3/userinfo", {
                 headers: { Authorization: `Bearer ${data.googleAccessToken}` },
@@ -94,18 +96,16 @@ const googleSignup = (req, res) => {
                 const email = response.data.email;
                 //            const photo = response.data.picture;
 
-                const userExists = User.findOne({ email });
-
+                const userExists = await User.findOne({ email });
+                console.log(email, userExists);
                 if (userExists) {
-                    return res
-                        .status(400)
-                        .json({ message: "User already exists!" });
+                    return googleSignin(req, res);
                 } else {
-                    const user = await User.signup({ email });
+                    const user = await User.googleSignUp(email);
 
                     const token = createToken(user._id);
 
-                    res.status(200).json({ email: user.email, token });
+                    return res.status(200).json({ email: user.email, token });
                 }
             });
     } catch (error) {
