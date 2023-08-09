@@ -24,7 +24,7 @@ export const useLogin = () => {
 
         if (response === undefined) {
             setIsLoading(false);
-            setError(response.error);
+            setError(response?.error);
         } else {
             console.log("here", response);
             // save the user to local storage

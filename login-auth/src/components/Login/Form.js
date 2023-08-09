@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useLogin } from "../../hooks/useLogin";
 import { LoginTypes } from "../../constants/LoginTypes";
 import { useGoogleLogin } from "@react-oauth/google";
+import { Button } from "../../ui-components/Button";
+import { InputBox } from "../../ui-components/Input";
+
+import { Col, Container, Row } from "react-bootstrap";
+import theme from "../../ui-components/theme";
+import { LogForm } from "./FormStyle";
+import { Link } from "react-router-dom";
 
 export default function LoginForm() {
     const { login, isLoading, error } = useLogin();
@@ -27,30 +34,77 @@ export default function LoginForm() {
     });
 
     return (
-        <>
-            <form className="login" onSubmit={handleLogin}>
-                <h3>Log In</h3>
-
-                <label>Email address:</label>
-                <input
-                    type="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                />
-                <label>Password:</label>
-                <input
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                />
-
-                <button disabled={isLoading}>Log in</button>
+        <Container style={{ display: "flex", justifyContent: "center" }}>
+            <LogForm className="login" onSubmit={handleLogin}>
+                <Row>
+                    <Col xs={12}>
+                        <h2
+                            style={{
+                                fontSize: theme.fonts.h2,
+                                fontWeight: "bold",
+                                color: theme.colors.primary,
+                            }}
+                        >
+                            Log In
+                        </h2>
+                        <h3
+                            style={{
+                                fontSize: theme.fonts.h3,
+                                paddingInline: "1rem",
+                            }}
+                        >
+                            Login fast and start creating your stories
+                        </h3>
+                    </Col>
+                    <Col xs={12}>
+                        <label>Email address:</label>
+                        <InputBox
+                            type="email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
+                        />
+                    </Col>
+                    <Col xs={12}>
+                        {" "}
+                        <label>Password:</label>
+                        <InputBox
+                            type="password"
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
+                        />
+                    </Col>
+                    <Col xs={12}>
+                        <Button
+                            width="100%"
+                            type="submit"
+                            variant="primary"
+                            disabled={isLoading}
+                        >
+                            Log in
+                        </Button>
+                    </Col>
+                    <Col xs={12}>
+                        <Button
+                            width="100%"
+                            variant="secondary"
+                            disabled={isLoading}
+                            onClick={googleLogin}
+                        >
+                            Log in with Google
+                        </Button>
+                    </Col>
+                    <Col xs={12}>Do not have an account?</Col>
+                    <Col xs={12}>
+                        {" "}
+                        <Button as={Link} to={"/signup"} variant={"tertiary"}>
+                            {" "}
+                            Sign up now!
+                        </Button>
+                    </Col>
+                </Row>
 
                 {error && <div className="error">{error}</div>}
-            </form>
-            <button disabled={isLoading} onClick={googleLogin}>
-                Log in
-            </button>
-        </>
+            </LogForm>
+        </Container>
     );
 }
