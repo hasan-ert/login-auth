@@ -15,10 +15,11 @@ const AuthAPI = {
     async signIn(data) {
         try {
             const res = await API.post("/user/login", data);
-            return res.data;
+            return res;
         } catch (err) {
-            console.log("Error occured during login");
-            return;
+            debugger;
+            const res = err.response;
+            return res;
         }
     },
     async signInGoogle(accessToken) {
@@ -28,7 +29,7 @@ const AuthAPI = {
             });
             return res.data;
         } catch (err) {
-            console.log("Error occured during login");
+            console.log(`Error occured during login: ${err}`);
             return;
         }
     },
@@ -38,7 +39,7 @@ const AuthAPI = {
             const res = await API.post("/user/signup", data);
             return res.data;
         } catch (err) {
-            console.log("Error occured during login");
+            console.log(`Error occured during login: ${err}`);
             return;
         }
     },
@@ -50,7 +51,7 @@ const AuthAPI = {
             });
             return res.data;
         } catch (err) {
-            console.log("Error occured during login: ", err);
+            console.log(`Error occured during login: ${err}`);
             return;
         }
     },

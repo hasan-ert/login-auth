@@ -10,14 +10,21 @@ const loginUser = async (req, res) => {
     if (req.body.googleAccessToken) {
         googleSignin(req, res);
     } else {
+        console.log("in loginUser");
         const { email, password } = req.body;
+
         try {
-            const user = await User.login(email, password);
+            const result = await User.login(email, password);
 
-            // create a token
-            const token = createToken(user._id);
+            console.log(result);
+            if (result.success) {
+                // create a token
+                const token = createToken(result.user._id);
 
-            res.status(200).json({ email, token });
+                res.status(200).json({ email, token });
+            } else {
+                res.status(401).json({ message: result.error });
+            }
         } catch (error) {
             res.status(400).json({ error: error.message });
         }
@@ -32,12 +39,16 @@ const signupUser = async (req, res) => {
         googleSignup(req, res);
     } else {
         try {
-            const user = await User.signup(email, password);
+            const result = await User.signup(email, password);
 
-            // create a token
-            const token = createToken(user._id);
+            if (result.success) {
+                // create a token
+                const token = createToken(result.user._id);
 
-            res.status(200).json({ email, token });
+                res.status(200).json({ email, token });
+            } else {
+                res.status(401).json({ error: result.error });
+            }
         } catch (error) {
             res.status(400).json({
                 message: "An error occured during signup",
@@ -67,11 +78,18 @@ const googleSignin = (req, res) => {
                         .status(400)
                         .json({ message: "User does not exists!" });
                 } else {
-                    const user = await User.loginGoogle(email);
+                    const result = await User.loginGoogle(email);
 
-                    const token = createToken(user._id);
+                    if (result.success) {
+                        const token = createToken(result.user._id);
 
-                    res.status(200).json({ email: user.email, token });
+                        res.status(200).json({
+                            email: result.user.email,
+                            token,
+                        });
+                    } else {
+                        res.status(401).json({ error: result.error });
+                    }
                 }
             });
     } catch (error) {
@@ -101,11 +119,16 @@ const googleSignup = (req, res) => {
                 if (userExists) {
                     return googleSignin(req, res);
                 } else {
-                    const user = await User.googleSignUp(email);
+                    const result = await User.googleSignUp(email);
+                    if (result.success) {
+                        const token = createToken(result.user._id);
 
-                    const token = createToken(user._id);
-
-                    return res.status(200).json({ email: user.email, token });
+                        return res
+                            .status(200)
+                            .json({ email: result.user.email, token });
+                    } else {
+                        res.status(401).json({ error: result.error });
+                    }
                 }
             });
     } catch (error) {

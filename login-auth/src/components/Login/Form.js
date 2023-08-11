@@ -9,6 +9,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import theme from "../../ui-components/theme";
 import { LogForm } from "./FormStyle";
 import { Link } from "react-router-dom";
+import { Error } from "../../ui-components/Error";
+import { Text } from "../../ui-components/Headings";
 
 export default function LoginForm() {
     const { login, isLoading, error } = useLogin();
@@ -65,13 +67,26 @@ export default function LoginForm() {
                         />
                     </Col>
                     <Col xs={12}>
-                        {" "}
                         <label>Password:</label>
                         <InputBox
                             type="password"
                             onChange={(e) => setPassword(e.target.value)}
                             value={password}
                         />
+                    </Col>
+                    <Col xs={12}>
+                        {error && (
+                            <Error className="error">
+                                <Text
+                                    style={{
+                                        marginBottom: "0",
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    {error}
+                                </Text>
+                            </Error>
+                        )}
                     </Col>
                     <Col xs={12}>
                         <Button
@@ -95,15 +110,11 @@ export default function LoginForm() {
                     </Col>
                     <Col xs={12}>Do not have an account?</Col>
                     <Col xs={12}>
-                        {" "}
                         <Button as={Link} to={"/signup"} variant={"tertiary"}>
-                            {" "}
                             Sign up now!
                         </Button>
                     </Col>
                 </Row>
-
-                {error && <div className="error">{error}</div>}
             </LogForm>
         </Container>
     );

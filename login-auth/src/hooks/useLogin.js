@@ -22,16 +22,16 @@ export const useLogin = () => {
             response = await AuthAPI.signIn(data);
         }
 
-        if (response === undefined) {
+        debugger;
+        if (response === undefined || response.status === 401) {
             setIsLoading(false);
-            setError(response?.error);
-        } else {
-            console.log("here", response);
+            setError(response?.data.message);
+        } else if (response.status === 200) {
             // save the user to local storage
-            localStorage.setItem("user", JSON.stringify(response));
+            localStorage.setItem("user", JSON.stringify(response.data));
 
             // update the auth context
-            dispatch({ type: "LOGIN", payload: response });
+            dispatch({ type: "LOGIN", payload: response.data });
 
             // update loading state
             setIsLoading(false);
