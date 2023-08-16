@@ -3,6 +3,7 @@ import theme from "../themes/theme";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { Text } from "./Headings";
 const DropdownItem = styled(Button)`
     height: 40px;
     background-color: ${theme.colors.text.white};
@@ -145,30 +146,15 @@ function CustomDropdown({
               setIsOpen(!open);
           };
 
-    const itemGenerator = () => {
-        if (items === undefined || items.length === 0) return <></>;
-        else {
-            return items.map((item, ind) => {
-                if (item.type === "link")
-                    return (
-                        <DropdownItem key={ind} as={Link} to={item?.href}>
-                            {item?.text}
-                        </DropdownItem>
-                    );
-                if (item.type == "button")
-                    return (
-                        <DropdownItem key={ind} onClick={item?.callback}>
-                            {item?.text}
-                        </DropdownItem>
-                    );
-            });
-        }
-    };
-
     return (
         <DropdownWrapper $open={open} {...rest} ref={ref}>
-            <DropdownToggle onClick={toggleDropdown}>Hasanus</DropdownToggle>
-            <DropdownMenu>{itemGenerator()}</DropdownMenu>
+            <DropdownToggle onClick={toggleDropdown}>
+                {rest.icon ? rest.icon : ""}
+                <Text style={{ marginBottom: "0", textAlign: "center" }}>
+                    {rest.text ? rest.text : ""}
+                </Text>
+            </DropdownToggle>
+            <DropdownMenu>{rest.children}</DropdownMenu>
         </DropdownWrapper>
     );
 }

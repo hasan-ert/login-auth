@@ -1,11 +1,31 @@
 import React from "react";
-import { CustomDropdown } from "../../ui-components/Dropdown";
+//context
+import { useAuthContext } from "../../hooks/useAuthContext";
+
+//ui components
+import {
+    CustomDropdown,
+    DropdownItem,
+    DropdownToggle,
+} from "../../ui-components/Dropdown";
+
+//icon
+import { UilUserCircle } from "@iconscout/react-unicons";
 export default function ProfileButton() {
+    const { user, dispatch } = useAuthContext();
+
+    const handleLogout = () => {
+        dispatch({ type: "LOGOUT" });
+    };
+
     return (
         <CustomDropdown
             open={true}
             closeOnOutsideClick
-            items={[{ type: "button", callback: () => {}, text: "Hello" }]}
-        ></CustomDropdown>
+            icon={<UilUserCircle size="32" />}
+            text={"Hasanus"}
+        >
+            <DropdownItem onClick={handleLogout}>Logout</DropdownItem>
+        </CustomDropdown>
     );
 }

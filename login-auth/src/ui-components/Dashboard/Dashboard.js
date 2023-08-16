@@ -31,7 +31,7 @@ const Panel = () => {
             <Sidebar />
             <MainContent>
                 <Header>
-                    <ProfileButton></ProfileButton>
+                    <ProfileButton />
                 </Header>
             </MainContent>
         </LayoutContainer>
