@@ -14,7 +14,6 @@ export default function useSignup() {
     const signUp = async (data, type) => {
         setIsLoading(true);
         setError(null);
-
         let response;
         console.log(data);
         if (type === LoginTypes.Google) {

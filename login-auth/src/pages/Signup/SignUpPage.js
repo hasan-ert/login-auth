@@ -4,6 +4,7 @@ import LoginForm from "../../components/Login/Form";
 import { styled } from "styled-components";
 import theme from "../../themes/theme";
 import { H1, H2, Text } from "../../ui-components/Headings";
+import SignUpForm from "../../components/Signup/SignUpForm";
 
 const FormWrapper = styled.div`
     padding-block: 3rem;
@@ -19,7 +20,7 @@ const ContentRow = styled(Row)`
         flex-direction: column-reverse;
     }
 `;
-function LoginPage() {
+function SignUpPage() {
     return (
         <Container fluid>
             <Row
@@ -63,7 +64,7 @@ function LoginPage() {
                 </Col>
                 <Col xs={12} md={4}>
                     <FormWrapper>
-                        <LoginForm />
+                        <SignUpForm />
                     </FormWrapper>
                 </Col>
             </ContentRow>
@@ -71,4 +72,4 @@ function LoginPage() {
     );
 }
 
-export default LoginPage;
+export default SignUpPage;

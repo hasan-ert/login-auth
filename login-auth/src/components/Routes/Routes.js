@@ -6,11 +6,15 @@ import HomePage from "../../pages/Home/HomePage";
 import LoginPage from "../../pages/Login/LoginPage";
 import RouteGuard from "../RouteGuard/RouteGuard";
 import About from "../../pages/About/About";
-import Signup from "../../pages/Signup/Form";
+import SignUpPage from "../../pages/Signup/SignUpPage";
 
 function RouteController() {
     //store the route inside this list
     const routeList = [
+        {
+            path: "/",
+            element: <HomePage />,
+        },
         {
             path: "/home",
             element: <HomePage />,
@@ -37,7 +41,7 @@ function RouteController() {
                     })}
                 </Route>
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<Signup />} />
+                <Route path="/signup" element={<SignUpPage />} />
             </Routes>
         </Router>
     );

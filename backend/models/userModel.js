@@ -141,7 +141,7 @@ userSchema.statics.login = async function (email, password) {
 
 userSchema.statics.loginGoogle = async function (email) {
     let response;
-
+    let errorMessage;
     if (!email) {
         errorMessage = "All fields must be filled";
     }

@@ -11,7 +11,7 @@ import { InputBox } from "../../ui-components/Input";
 import { Button } from "../../ui-components/Button";
 import { LogForm } from "../Login/FormStyle";
 
-import theme from "../../ui-components/theme";
+import theme from "../../themes/theme";
 import { H2, H3 } from "../../ui-components/Headings";
 
 export default function SignUpForm() {
@@ -42,63 +42,66 @@ export default function SignUpForm() {
         <Container style={{ display: "flex", justifyContent: "center" }}>
             <LogForm className="login" onSubmit={handleSignup}>
                 <Row>
-                    <Col xs={12}>
-                        <H2
-                            style={{
-                                fontSize: theme.fonts.h2,
-                                fontWeight: "bold",
-                                color: theme.colors.primary,
-                                textAlign: "center",
-                            }}
-                        >
-                            Sign Up
-                        </H2>
-                        <H3
-                            style={{
-                                fontSize: theme.fonts.h3,
-                                paddingInline: "1rem",
-                                textAlign: "center",
-                            }}
-                        >
-                            Sign up with a few clicks, then you are good to go
-                        </H3>
-                    </Col>
-                    <Col xs={12}>
-                        <label>Email address:</label>
-                        <InputBox
-                            type="email"
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                        />
-                    </Col>
-                    <Col xs={12}>
-                        {" "}
-                        <label>Password:</label>
-                        <InputBox
-                            type="password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                        />
-                    </Col>
-                    <Col xs={12}>
-                        {" "}
-                        <label>Password Again:</label>
-                        <InputBox
-                            type="password"
-                            onChange={(e) => setPassword2(e.target.value)}
-                            value={password2}
-                        />
-                    </Col>
-                    <Col xs={12}>
-                        <Button
-                            width="100%"
-                            type="submit"
-                            variant="primary"
-                            disabled={isLoading}
-                        >
-                            Sign Up
-                        </Button>
-                    </Col>
+                    <form>
+                        <Col xs={12}>
+                            <H2
+                                style={{
+                                    fontSize: theme.fonts.h2,
+                                    fontWeight: "bold",
+                                    color: theme.colors.primary.normal,
+                                    textAlign: "center",
+                                }}
+                            >
+                                Sign Up
+                            </H2>
+                            <H3
+                                style={{
+                                    fontSize: theme.fonts.h3,
+                                    paddingInline: "1rem",
+                                    textAlign: "center",
+                                }}
+                            >
+                                Sign up with a few clicks, then you are good to
+                                go
+                            </H3>
+                        </Col>
+                        <Col xs={12}>
+                            <label>Email address:</label>
+                            <InputBox
+                                type="email"
+                                onChange={(e) => setEmail(e.target.value)}
+                                value={email}
+                            />
+                        </Col>
+                        <Col xs={12}>
+                            {" "}
+                            <label>Password:</label>
+                            <InputBox
+                                type="password"
+                                onChange={(e) => setPassword(e.target.value)}
+                                value={password}
+                            />
+                        </Col>
+                        <Col xs={12}>
+                            {" "}
+                            <label>Password Again:</label>
+                            <InputBox
+                                type="password"
+                                onChange={(e) => setPassword2(e.target.value)}
+                                value={password2}
+                            />
+                        </Col>
+                        <Col xs={12}>
+                            <Button
+                                width="100%"
+                                type="submit"
+                                variant="primary"
+                                disabled={isLoading}
+                            >
+                                Sign Up
+                            </Button>
+                        </Col>
+                    </form>
                     <Col xs={12}>
                         <Button
                             width="100%"
@@ -107,6 +110,12 @@ export default function SignUpForm() {
                             onClick={googleSignUp}
                         >
                             Sign up with Google
+                        </Button>
+                    </Col>
+                    <Col xs={12}>Already have an account?</Col>
+                    <Col xs={12}>
+                        <Button as={Link} to={"/login"} variant={"tertiary"}>
+                            Login now!
                         </Button>
                     </Col>
                 </Row>

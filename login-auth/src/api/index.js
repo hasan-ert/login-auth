@@ -17,7 +17,6 @@ const AuthAPI = {
             const res = await API.post("/user/login", data);
             return res;
         } catch (err) {
-            debugger;
             const res = err.response;
             return res;
         }
@@ -27,7 +26,7 @@ const AuthAPI = {
             const res = await API.post("/user/login", {
                 googleAccessToken: accessToken,
             });
-            return res.data;
+            return res;
         } catch (err) {
             console.log(`Error occured during login: ${err}`);
             return;
@@ -37,7 +36,7 @@ const AuthAPI = {
     async signUp(data) {
         try {
             const res = await API.post("/user/signup", data);
-            return res.data;
+            return res;
         } catch (err) {
             console.log(`Error occured during login: ${err}`);
             return;
@@ -49,7 +48,7 @@ const AuthAPI = {
             const res = await API.post("/user/signup", {
                 googleAccessToken: accessToken,
             });
-            return res.data;
+            return res;
         } catch (err) {
             console.log(`Error occured during login: ${err}`);
             return;

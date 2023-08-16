@@ -6,7 +6,7 @@ import { Button } from "../../ui-components/Button";
 import { InputBox } from "../../ui-components/Input";
 
 import { Col, Container, Row } from "react-bootstrap";
-import theme from "../../ui-components/theme";
+import theme from "../../themes/theme";
 import { LogForm } from "./FormStyle";
 import { Link } from "react-router-dom";
 import { Error } from "../../ui-components/Error";
@@ -39,65 +39,72 @@ export default function LoginForm() {
         <Container style={{ display: "flex", justifyContent: "center" }}>
             <LogForm className="login" onSubmit={handleLogin}>
                 <Row>
-                    <Col xs={12}>
-                        <h2
-                            style={{
-                                fontSize: theme.fonts.h2,
-                                fontWeight: "bold",
-                                color: theme.colors.primary,
-                            }}
-                        >
-                            Log In
-                        </h2>
-                        <h3
-                            style={{
-                                fontSize: theme.fonts.h3,
-                                paddingInline: "1rem",
-                            }}
-                        >
-                            Login fast and start creating your stories
-                        </h3>
-                    </Col>
-                    <Col xs={12}>
-                        <label>Email address:</label>
-                        <InputBox
-                            type="email"
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                        />
-                    </Col>
-                    <Col xs={12}>
-                        <label>Password:</label>
-                        <InputBox
-                            type="password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                        />
-                    </Col>
-                    <Col xs={12}>
-                        {error && (
-                            <Error className="error">
-                                <Text
+                    <form>
+                        <Row>
+                            <Col xs={12}>
+                                <h2
                                     style={{
-                                        marginBottom: "0",
-                                        textAlign: "center",
+                                        fontSize: theme.fonts.h2,
+                                        fontWeight: "bold",
+                                        color: theme.colors.primary.normal,
                                     }}
                                 >
-                                    {error}
-                                </Text>
-                            </Error>
-                        )}
-                    </Col>
-                    <Col xs={12}>
-                        <Button
-                            width="100%"
-                            type="submit"
-                            variant="primary"
-                            disabled={isLoading}
-                        >
-                            Log in
-                        </Button>
-                    </Col>
+                                    Log In
+                                </h2>
+                                <h3
+                                    style={{
+                                        fontSize: theme.fonts.h3,
+                                        paddingInline: "1rem",
+                                    }}
+                                >
+                                    Login fast and start creating your stories
+                                </h3>
+                            </Col>
+                            <Col xs={12}>
+                                <label>Email address:</label>
+                                <InputBox
+                                    type="email"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={email}
+                                />
+                            </Col>
+                            <Col xs={12}>
+                                <label>Password:</label>
+                                <InputBox
+                                    type="password"
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                    value={password}
+                                />
+                            </Col>
+                            <Col xs={12}>
+                                {error && (
+                                    <Error className="error">
+                                        <Text
+                                            style={{
+                                                marginBottom: "0",
+                                                textAlign: "center",
+                                            }}
+                                        >
+                                            {error}
+                                        </Text>
+                                    </Error>
+                                )}
+                            </Col>
+                            <Col xs={12}>
+                                <Button
+                                    width="100%"
+                                    type="submit"
+                                    variant="primary"
+                                    disabled={isLoading}
+                                >
+                                    Log in
+                                </Button>
+                            </Col>
+                        </Row>
+                    </form>
+
                     <Col xs={12}>
                         <Button
                             width="100%"

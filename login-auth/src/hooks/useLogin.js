@@ -22,7 +22,6 @@ export const useLogin = () => {
             response = await AuthAPI.signIn(data);
         }
 
-        debugger;
         if (response === undefined || response.status === 401) {
             setIsLoading(false);
             setError(response?.data.message);
