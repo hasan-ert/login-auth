@@ -1,7 +1,7 @@
 import React from "react";
 
 //theme
-import theme from "./theme";
+import theme from "../themes/theme";
 
 //packages
 import styled from "styled-components";
@@ -9,15 +9,16 @@ import styled from "styled-components";
 const Button = styled.button`
     margin-bottom: ${theme.btn.marginBlock};
     color: ${(props) => {
-        if (props.variant === "tertiary") return theme.colors.primary;
-        else if (props.variant === "secondary") return theme.colors.blackText;
-        else return theme.colors.whiteText;
+        if (props.variant === "tertiary") return theme.colors.primary.normal;
+        else if (props.variant === "secondary") return theme.colors.text.black;
+        else return theme.colors.text.white;
     }};
 
     background-color: ${(props) => {
         if (props.variant === "tertiary") return "transparent";
-        else if (props.variant === "secondary") return theme.colors.greyCont;
-        else return theme.colors.primary;
+        else if (props.variant === "secondary")
+            return theme.colors.container.normal;
+        else return theme.colors.primary.normal;
     }};
     min-width: ${(props) => (props.width ? props.width : theme.btn.width)};
     min-height: ${(props) => (props.height ? props.height : theme.btn.height)};
@@ -36,15 +37,15 @@ const Button = styled.button`
         background-color: ${(props) => {
             if (props.variant === "tertiary") return "transparent";
             else if (props.variant === "secondary")
-                return theme.colors.greyContDark;
-            else return theme.colors.primaryDark;
+                return theme.colors.container.dark;
+            else return theme.colors.primary.dark;
         }};
 
         color: ${(props) => {
-            if (props.variant === "tertiary") return theme.colors.primaryDark;
+            if (props.variant === "tertiary") return theme.colors.primary.dark;
             else if (props.variant === "secondary")
-                return theme.colors.blackText;
-            else return theme.colors.whiteText;
+                return theme.colors.text.black;
+            else return theme.colors.text.white;
         }};
     }
 
@@ -52,15 +53,16 @@ const Button = styled.button`
         background-color: ${(props) => {
             if (props.variant === "tertiary") return "transparent";
             else if (props.variant === "secondary")
-                return theme.colors.greyContDarker;
-            else return theme.colors.primaryDarker;
+                return theme.colors.container.dark;
+            else return theme.colors.primary.darker;
         }};
 
         color: ${(props) => {
-            if (props.variant === "tertiary") return theme.colors.primaryDarker;
+            if (props.variant === "tertiary")
+                return theme.colors.primary.darker;
             else if (props.variant === "secondary")
-                return theme.colors.blackText;
-            else return theme.colors.whiteText;
+                return theme.colors.text.black;
+            else return theme.colors.text.white;
         }};
     }
 `;

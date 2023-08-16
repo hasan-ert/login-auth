@@ -6,18 +6,27 @@ const theme = {
         p: "12pt",
     },
     colors: {
-        primary: "#EA1515",
-        primaryDark: "#d61313",
-        primaryDarker: "#b71010",
-        primaryLight: "#ff6b6b",
-        primaryLight: "#FF8080",
-        blackText: "#101010",
-        blackSubtext: "#7C7C7C",
-        greyBg: "#F6F6F6",
-        greyCont: "#e5e5e5",
-        greyContDark: "#d3d3d3",
-        greyContDarker: "#b2b0b0",
-        whiteText: "#FBFBFB",
+        primary: {
+            normal: "#EA1515",
+            dark: "#9B0E0E ",
+            darker: "#730D0D ",
+            light: "#FF7373 ",
+            lighter: "#FFB6B6 ",
+        },
+
+        secondary: {
+            normal: "#A1D6E2 ",
+        },
+        text: {
+            black: "#101010",
+            grey: "#7C7C7C",
+            white: "#FDFDFD ",
+        },
+        container: {
+            bg: "#F6F6F6",
+            nomal: "#333333",
+            dark: "#d3d3d3",
+        },
     },
     btn: {
         width: "150px",

@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-import theme from "./theme";
+import theme from "../themes/theme";
 
 const H1 = styled.h1`
     font-size: ${theme.fonts.h1};
