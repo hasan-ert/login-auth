@@ -3,11 +3,7 @@ import React from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 //ui components
-import {
-    CustomDropdown,
-    DropdownItem,
-    DropdownToggle,
-} from "../../ui-components/Dropdown";
+import { CustomDropdown, DropdownItem } from "../../ui-components/Dropdown";
 
 //icon
 import { UilUserCircle } from "@iconscout/react-unicons";

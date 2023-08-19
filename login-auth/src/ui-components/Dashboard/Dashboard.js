@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import theme from "../../themes/theme";
-import { CustomDropdown } from "../Dropdown";
 import Sidebar from "../Sidebar/Sidebar";
-import { Button } from "react-bootstrap";
 import ProfileButton from "../../components/ProfileButton/ProfileButton";
 
 const LayoutContainer = styled.div`

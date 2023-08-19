@@ -121,7 +121,7 @@ function CustomDropdown({
         return () => {
             window.removeEventListener("click", handleOutsideClick);
         };
-    }, []);
+    }, [closeOnOutsideClick]);
 
     const handleOutsideClick = (e) => {
         if (ref.current)
