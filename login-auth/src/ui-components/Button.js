@@ -20,7 +20,7 @@ const Button = styled.button`
             return theme.colors.container.normal;
         else return theme.colors.primary.normal;
     }};
-    min-width: ${(props) => (props.width ? props.width : theme.btn.width)};
+    width: ${(props) => (props.width ? props.width : theme.btn.width)};
     min-height: ${(props) => (props.height ? props.height : theme.btn.height)};
     border: ${(props) =>
             props.border ? props.border : theme.btn.borderThickness}

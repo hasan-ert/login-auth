@@ -4,7 +4,8 @@ import Sidebar from "../Sidebar/Sidebar";
 import ProfileButton from "../../components/ProfileButton/ProfileButton";
 
 const LayoutContainer = styled.div`
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
     height: 100vh;
     background-color: #f0f0f0;
     padding: 1rem;

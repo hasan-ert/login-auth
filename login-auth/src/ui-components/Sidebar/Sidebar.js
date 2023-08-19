@@ -1,57 +1,55 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+
+import { Col, Row } from "react-bootstrap";
+import {
+    SidebarButton,
+    SidebarContent,
+    SidebarInside,
+    SidebarWrapper,
+    ToggleButton,
+} from "./SidebarComps";
+import { Text } from "../Headings";
+
+//icons
 import { UilAngleRightB } from "@iconscout/react-unicons";
-import theme from "../../themes/theme";
+import { UilVideo } from "@iconscout/react-unicons";
+import { UilImages } from "@iconscout/react-unicons";
+import { Link } from "react-router-dom";
 
-const SidebarWrapper = styled.div`
-    width: ${(props) => (props.$isOpen ? "20%" : "0")};
+const sidebarItems = [
+    {
+        icon: <UilVideo size={24} />,
+        text: `Create Video`,
+        link: "/create-video",
+    },
+    { icon: <UilImages size={24} />, text: `Media`, link: "/media" },
+];
 
-    transition: width 0.3s ease-in-out;
-`;
-
-const SidebarContent = styled.div`
-    position: relative;
-    background-color: ${theme.colors.primary.normal};
-    width: 100%;
-    height: 100%;
-
-    border-radius: 25px;
-    border-top-right-radius: 0;
-    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
-        rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
-`;
-const ToggleButton = styled.button`
-    display: flex;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    top: 0;
-    right: ${(props) => (props.$isOpen ? "-30px" : "-1rem")};
-    border: none;
-    color: ${theme.colors.text.white};
-    cursor: pointer;
-    z-index: 3;
-    background-color: ${theme.colors.primary.normal};
-    &::before {
-        position: absolute;
-        content: "";
-        background-color: transparent;
-        height: 10px;
-        width: 30px;
-        top: 30px;
-        left: 0;
-        border-top-left-radius: 5px;
-        box-shadow: ${(props) =>
-            props.$isOpen
-                ? "-8px -6px 0 0 " + theme.colors.primary.normal
-                : "none"};
+const generateButtons = (arr) => {
+    if (Array.isArray(arr) && arr.length > 0) {
+        return arr.map((item, ind) => {
+            return (
+                <SidebarButton key={ind} as={Link} to={item.link}>
+                    <Row>
+                        <Col xs={4}>{item.icon}</Col>
+                        <Col xs={8}>
+                            <Text
+                                style={{
+                                    marginBottom: 0,
+                                }}
+                            >
+                                {item.text}
+                            </Text>
+                        </Col>
+                    </Row>
+                </SidebarButton>
+            );
+        });
     }
-`;
+};
 
 function Sidebar() {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
@@ -69,7 +67,13 @@ function Sidebar() {
                         }}
                     />
                 </ToggleButton>
-                {/* Sidebar content */}
+
+                <SidebarInside>
+                    <Row>
+                        <img src="https://lh3.googleusercontent.com/3zkP2SYe7yYoKKe47bsNe44yTgb4Ukh__rBbwXwgkjNRe4PykGG409ozBxzxkrubV7zHKjfxq6y9ShogWtMBMPyB3jiNps91LoNH8A=s500" />
+                    </Row>
+                    <Row>{generateButtons(sidebarItems)}</Row>
+                </SidebarInside>
             </SidebarContent>
         </SidebarWrapper>
     );
