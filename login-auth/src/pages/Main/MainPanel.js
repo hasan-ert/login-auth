@@ -17,7 +17,7 @@ const MainContent = styled.div`
 
 const Header = styled.div`
     width: auto;
-    height: auto;
+    height: 80px;
     background-color: transparent;
     display: flex;
     justify-content: flex-end;

@@ -65,7 +65,7 @@ const DropdownToggle = styled(Button)`
 
 const DropdownWrapper = styled.div`
     width: ${({ width }) => (width ? width : "150px")};
-
+    position: absolute;
     display: flex;
     flex-direction: column;
     /* Adjust as needed */
