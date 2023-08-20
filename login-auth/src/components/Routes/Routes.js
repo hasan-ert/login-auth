@@ -7,6 +7,8 @@ import LoginPage from "../../pages/Login/LoginPage";
 import RouteGuard from "../RouteGuard/RouteGuard";
 import About from "../../pages/About/About";
 import SignUpPage from "../../pages/Signup/SignUpPage";
+import MainPanel from "../../pages/Main/MainPanel";
+import Landing from "../MainPanel/Landing/Landing";
 
 function RouteController() {
     //store the route inside this list
@@ -16,8 +18,8 @@ function RouteController() {
             element: <HomePage />,
         },
         {
-            path: "/home",
-            element: <HomePage />,
+            path: "/main/*",
+            element: <MainPanel />,
         },
         {
             path: "/about",
@@ -47,4 +49,38 @@ function RouteController() {
     );
 }
 
+// Needs to be implemented to change the routes inside the dashboard
+function DashboardRouteController() {
+    //store the route inside this list
+    const routeList = [
+        {
+            path: "/",
+            element: <HomePage />,
+        },
+        {
+            path: "landing",
+            element: <Landing />,
+        },
+        {
+            path: "/about",
+            element: <About />,
+        },
+    ];
+
+    return (
+        <Routes>
+            {routeList?.map((route, ind) => {
+                return (
+                    <Route
+                        key={"route-" + ind}
+                        path={route.path}
+                        element={route.element}
+                    />
+                );
+            })}
+        </Routes>
+    );
+}
+
 export default RouteController;
+export { DashboardRouteController };

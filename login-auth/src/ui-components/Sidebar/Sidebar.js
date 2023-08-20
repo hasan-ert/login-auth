@@ -20,9 +20,9 @@ const sidebarItems = [
     {
         icon: <UilVideo size={24} />,
         text: `Create Video`,
-        link: "/create-video",
+        link: "create-video",
     },
-    { icon: <UilImages size={24} />, text: `Media`, link: "/media" },
+    { icon: <UilImages size={24} />, text: `Media`, link: "media" },
 ];
 
 const generateButtons = (arr) => {

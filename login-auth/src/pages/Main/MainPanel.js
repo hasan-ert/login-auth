@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "../../ui-components/Sidebar/Sidebar";
 import ProfileButton from "../../components/ProfileButton/ProfileButton";
+import { DashboardRouteController } from "../../components/Routes/Routes";
 
 const LayoutContainer = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 5fr;
+    display: flex;
     height: 100vh;
     background-color: #f0f0f0;
     padding: 1rem;
@@ -23,7 +23,7 @@ const Header = styled.div`
     justify-content: flex-end;
 `;
 
-const Panel = () => {
+const MainPanel = () => {
     return (
         <LayoutContainer>
             <Sidebar />
@@ -31,9 +31,10 @@ const Panel = () => {
                 <Header>
                     <ProfileButton />
                 </Header>
+                <DashboardRouteController />
             </MainContent>
         </LayoutContainer>
     );
 };
 
-export default Panel;
+export default MainPanel;

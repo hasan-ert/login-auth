@@ -102,12 +102,20 @@ const SidebarButton = styled(Button)`
 `;
 
 const SidebarWrapper = styled.div`
-    width: ${(props) => (props.$isOpen ? "100%" : "0")};
+    width: ${(props) => (props.$isOpen ? "15%" : "0")};
     transition: width 0.3s ease-in-out;
 
     ${SidebarInside} {
         width: ${(props) => (props.$isOpen ? "100%" : "0")};
         display: ${(props) => (props.$isOpen ? "flex" : "none")};
+    }
+
+    @media only screen and (${devices.xs}) {
+        position: absolute;
+        width: ${(props) => (props.$isOpen ? "100%" : "0")};
+        z-index: 3;
+        top: 0;
+        left: 0;
     }
 `;
 

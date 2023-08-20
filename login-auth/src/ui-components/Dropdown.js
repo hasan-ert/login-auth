@@ -149,9 +149,9 @@ function CustomDropdown({
     return (
         <DropdownWrapper $open={open} {...rest} ref={ref}>
             <DropdownToggle onClick={toggleDropdown}>
-                {rest.icon ? rest.icon : ""}
+                {rest.$icon ? rest.$icon : ""}
                 <Text style={{ marginBottom: "0", textAlign: "center" }}>
-                    {rest.text ? rest.text : ""}
+                    {rest.$text ? rest.$text : ""}
                 </Text>
             </DropdownToggle>
             <DropdownMenu>{rest.children}</DropdownMenu>

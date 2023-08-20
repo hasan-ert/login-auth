@@ -18,8 +18,8 @@ export default function ProfileButton() {
         <CustomDropdown
             open={true}
             closeOnOutsideClick
-            icon={<UilUserCircle size="32" />}
-            text={"Hasanus"}
+            $icon={<UilUserCircle size="32" />}
+            $text={"Hasanus"}
         >
             <DropdownItem onClick={handleLogout}>Logout</DropdownItem>
         </CustomDropdown>
